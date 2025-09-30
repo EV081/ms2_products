@@ -1,5 +1,7 @@
+/home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/CORS/CorsConfig.java
 /home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/Ms2ProductosApplication.java
 /home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/application/CategoriaController.java
+/home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/application/Healthcheck.java
 /home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/application/ProductoController.java
 /home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/domain/Categoria.java
 /home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/domain/CategoriaDTO.java
