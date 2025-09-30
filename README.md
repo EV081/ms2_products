@@ -92,7 +92,7 @@ cors.allowed-origins=${CORS_ALLOWED_ORIGINS}
 3. **Acceder a la API**
 
    * Healthcheck → [http://localhost:8080/healthcheck](http://localhost:8080/healthcheck)
-   * Swagger → [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/docs)
+   * Swagger → [http://localhost:8080/docs](http://localhost:8080/docs)
 
 ---
 
