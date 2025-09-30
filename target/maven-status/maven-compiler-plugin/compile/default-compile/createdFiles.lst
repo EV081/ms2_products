@@ -1,0 +1,12 @@
+com/example/ms2_productos/application/CategoriaController.class
+com/example/ms2_productos/repository/ProductoRepository.class
+com/example/ms2_productos/service/ProductoService.class
+com/example/ms2_productos/application/ProductoController.class
+com/example/ms2_productos/domain/ProductoRequestDTO.class
+com/example/ms2_productos/domain/ProductoResponseDTO.class
+com/example/ms2_productos/domain/Producto.class
+com/example/ms2_productos/service/CategoriaService.class
+com/example/ms2_productos/domain/CategoriaDTO.class
+com/example/ms2_productos/domain/Categoria.class
+com/example/ms2_productos/Ms2ProductosApplication.class
+com/example/ms2_productos/repository/CategoriaRepository.class

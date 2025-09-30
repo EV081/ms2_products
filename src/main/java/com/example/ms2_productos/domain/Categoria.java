@@ -22,7 +22,7 @@ public class Categoria {
     private String nombreCategoria;
     private String descripcionCategoria;
 
-    @OneToMany(mappedBy = "categoria")
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Producto> productos = new ArrayList<>();
 
