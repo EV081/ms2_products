@@ -1,15 +1,18 @@
 package com.example.ms2_productos.application;
 
 import com.example.ms2_productos.domain.Producto;
-import com.example.ms2_productos.domain.ProductoResponseDTO;
+import com.example.ms2_productos.domain.dto.PaginatedResponse;
+import com.example.ms2_productos.domain.dto.ProductoResponseDTO;
 import com.example.ms2_productos.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/productos")
@@ -18,15 +21,26 @@ public class ProductoController {
     @Autowired
     private ProductoService productoService;
 
-    // Endpoint para obtener todos los productos con sus categorías
     @GetMapping
-    public List<ProductoResponseDTO> obtenerTodosLosProductos() {
-        return productoService.obtenerTodosLosProductos().stream()
+    public PaginatedResponse<ProductoResponseDTO> obtenerProductos(
+            @PageableDefault(page = 0, size = 10) Pageable pageable
+    ) {
+        Page<Producto> page = productoService.obtenerProductos(pageable);
+
+        List<ProductoResponseDTO> content = page.getContent().stream()
                 .map(productoService::convertirAProductoResponseDTO)
-                .collect(Collectors.toList());
+                .toList();
+
+        PaginatedResponse<ProductoResponseDTO> resp = new PaginatedResponse<>();
+        resp.setContents(content);
+        resp.setPage(page.getNumber());
+        resp.setSize(page.getSize());
+        resp.setTotalElements(page.getTotalElements());
+        resp.setTotalPages(page.getTotalPages());
+
+        return resp;
     }
 
-    // Endpoint para obtener un producto por ID con su categoría
     @GetMapping("/{idProducto}")
     public ResponseEntity<ProductoResponseDTO> obtenerProductoPorId(@PathVariable Long idProducto) {
         Optional<Producto> producto = productoService.obtenerProductoPorId(idProducto);
@@ -34,14 +48,12 @@ public class ProductoController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    // Endpoint para crear un producto
     @PostMapping
     public ProductoResponseDTO crearProducto(@RequestBody Producto producto) {
         Producto productoCreado = productoService.crearProducto(producto);
         return productoService.convertirAProductoResponseDTO(productoCreado);
     }
 
-    // Endpoint para actualizar un producto
     @PutMapping("/{idProducto}")
     public ResponseEntity<ProductoResponseDTO> actualizarProducto(@PathVariable Long idProducto, @RequestBody Producto producto) {
         Producto productoActualizado = productoService.actualizarProducto(idProducto, producto);
@@ -50,7 +62,6 @@ public class ProductoController {
                 : ResponseEntity.notFound().build();
     }
 
-    // Endpoint para eliminar un producto
     @DeleteMapping("/{idProducto}")
     public ResponseEntity<Void> eliminarProducto(@PathVariable Long idProducto) {
         return productoService.eliminarProducto(idProducto)

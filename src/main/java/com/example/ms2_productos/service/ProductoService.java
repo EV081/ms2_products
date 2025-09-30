@@ -1,15 +1,16 @@
 package com.example.ms2_productos.service;
 
-import com.example.ms2_productos.domain.CategoriaDTO;  // Cambiado a 'dto'
-import com.example.ms2_productos.domain.ProductoResponseDTO;  // Cambiado a 'dto'
+import com.example.ms2_productos.domain.dto.CategoriaDTO;
+import com.example.ms2_productos.domain.dto.ProductoResponseDTO;
 import com.example.ms2_productos.domain.Categoria;
 import com.example.ms2_productos.domain.Producto;
 import com.example.ms2_productos.repository.CategoriaRepository;
 import com.example.ms2_productos.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,8 +39,8 @@ public class ProductoService {
         );
     }
 
-    public List<Producto> obtenerTodosLosProductos() {
-        return productoRepository.findAll();
+    public Page<Producto> obtenerProductos(Pageable pageable) {
+        return productoRepository.findAll(pageable);
     }
 
     public Optional<Producto> obtenerProductoPorId(Long idProducto) {

@@ -1,8 +1,15 @@
 package com.example.ms2_productos.application;
 
 import com.example.ms2_productos.domain.Categoria;
+import com.example.ms2_productos.domain.Producto;
+import com.example.ms2_productos.domain.dto.PaginatedResponse;
+import com.example.ms2_productos.domain.dto.ProductoResponseDTO;
 import com.example.ms2_productos.service.CategoriaService;
+import com.example.ms2_productos.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +23,42 @@ public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
 
+    @Autowired
+    private ProductoService productoService;
+
     @GetMapping
-    public List<Categoria> obtenerTodasLasCategorias() {
-        return categoriaService.obtenerTodasLasCategorias();
+    public PaginatedResponse<Categoria> obtenerCategorias(
+            @PageableDefault(page = 0, size = 10) Pageable pageable
+    ) {
+        Page<Categoria> page = categoriaService.obtenerCategorias(pageable);
+
+        PaginatedResponse<Categoria> resp = new PaginatedResponse<>();
+        resp.setContents(page.getContent());
+        resp.setPage(page.getNumber());
+        resp.setSize(page.getSize());
+        resp.setTotalElements(page.getTotalElements());
+        resp.setTotalPages(page.getTotalPages());
+        return resp;
+    }
+
+    @GetMapping("/{idCategoria}/productos")
+    public PaginatedResponse<ProductoResponseDTO> obtenerProductosPorCategoria(
+            @PathVariable Long idCategoria,
+            @PageableDefault(page = 0, size = 10) Pageable pageable
+    ) {
+        Page<Producto> page = categoriaService.obtenerProductosPorCategoria(idCategoria, pageable);
+
+        List<ProductoResponseDTO> content = page.getContent().stream()
+                .map(productoService::convertirAProductoResponseDTO)
+                .toList();
+
+        PaginatedResponse<ProductoResponseDTO> resp = new PaginatedResponse<>();
+        resp.setContents(content);
+        resp.setPage(page.getNumber());
+        resp.setSize(page.getSize());
+        resp.setTotalElements(page.getTotalElements());
+        resp.setTotalPages(page.getTotalPages());
+        return resp;
     }
 
     @GetMapping("/{idCategoria}")

@@ -1,8 +1,12 @@
 package com.example.ms2_productos.service;
 
 import com.example.ms2_productos.domain.Categoria;
+import com.example.ms2_productos.domain.Producto;
 import com.example.ms2_productos.repository.CategoriaRepository;
+import com.example.ms2_productos.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +18,16 @@ public class CategoriaService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    public List<Categoria> obtenerTodasLasCategorias() {
-        return categoriaRepository.findAll();
+    @Autowired
+    private ProductoRepository productoRepository;
+
+    public Page<Categoria> obtenerCategorias(Pageable pageable) {
+        return categoriaRepository.findAll(pageable);
+    }
+
+    // 2) Productos de una categoría paginados
+    public Page<Producto> obtenerProductosPorCategoria(Long idCategoria, Pageable pageable) {
+        return productoRepository.findByCategoria_IdCategoria(idCategoria, pageable);
     }
 
     public Optional<Categoria> obtenerCategoriaPorId(Long idCategoria) {
