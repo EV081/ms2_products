@@ -1,0 +1,12 @@
+/home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/Ms2ProductosApplication.java
+/home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/application/CategoriaController.java
+/home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/application/ProductoController.java
+/home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/domain/Categoria.java
+/home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/domain/CategoriaDTO.java
+/home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/domain/Producto.java
+/home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/domain/ProductoRequestDTO.java
+/home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/domain/ProductoResponseDTO.java
+/home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/repository/CategoriaRepository.java
+/home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/repository/ProductoRepository.java
+/home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/service/CategoriaService.java
+/home/vssz/UTEC/4to/Cloud/Proyecto/ms2_products/src/main/java/com/example/ms2_productos/service/ProductoService.java
