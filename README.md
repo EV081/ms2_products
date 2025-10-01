@@ -6,7 +6,7 @@ Base de datos en **MySQL 8** con integridad referencial: cada producto pertenece
 
 ---
 
-## 📋 Tablas y Relaciones
+## Tablas y Relaciones
 
 ### Relación entre tablas
 **Productos → Categorías: Relación N:1**  
@@ -32,9 +32,11 @@ Un producto pertenece a una categoría.
 
 ---
 
-🏗️ DTOs (Data Transfer Objects)
+## DTOs (Data Transfer Objects)
+
 CategoriaDTO
-java
+
+```java
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,8 +45,10 @@ public class CategoriaDTO {
     private String nombreCategoria;
     private String descripcionCategoria;
 }
+```
+
 ProductoRequestDTO (Para creación/actualización)
-java
+```java
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -54,8 +58,10 @@ public class ProductoRequestDTO {
     private double precio;
     private Long idCategoria;
 }
+```
+
 ProductoResponseDTO (Para respuestas)
-java
+```java
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -66,8 +72,10 @@ public class ProductoResponseDTO {
     private double precio;
     private CategoriaDTO categoria; 
 }
+```
+
 PaginatedResponse (Para paginación)
-java
+```java
 @Data
 @NoArgsConstructor
 public class PaginatedResponse<T> {
@@ -77,12 +85,12 @@ public class PaginatedResponse<T> {
     private long totalElements;
     private int totalPages;
 }
+```
 
-
-## 🚀 Endpoints de la API
+## Endpoints de la API
 
 ### Healthcheck & Documentación
-- **GET** `/healthcheck` → Verifica que el servicio esté activo
+- **GET** `/health` → Verifica que el servicio esté activo
 - **GET** `/swagger-ui/index.html` → Documentación interactiva de la API
 
 ### Productos
