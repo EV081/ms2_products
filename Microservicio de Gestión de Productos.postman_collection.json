@@ -16,7 +16,8 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/productos",
+							"raw": "http://localhost:8080/productos",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -59,7 +60,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombre\": \"Producto A\", \n    \"descripcion\": \"Descripción del Producto A\", \n    \"precio\": 100.0, \n    \"categoria\": {\n        \"idCategoria\": 1\n    }\n}"
+							"raw": "{\n    \"nombre\": \"Producto B\", \n    \"descripcion\": \"Descripción del Producto B\", \n    \"precio\": 100.0, \n    \"categoria\": {\n        \"idCategoria\": 1\n    }\n}"
 						},
 						"url": {
 							"raw": "localhost:8080/productos",
@@ -132,7 +133,8 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/categorias",
+							"raw": "http://localhost:8080/categorias",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -178,7 +180,8 @@
 							"raw": "{\n    \"nombreCategoria\": \"Categoría A\", \n    \"descripcionCategoria\": \"Descripción de Categoría A\"\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/categorias",
+							"raw": "http://localhost:8080/categorias",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -224,7 +227,8 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/categorias/1",
+							"raw": "http://localhost:8080/categorias/1",
+							"protocol": "http",
 							"host": [
 								"localhost"
 							],
@@ -236,8 +240,51 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "productos por categoria",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/categorias/1/productos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categorias",
+								"1",
+								"productos"
+							]
+						}
+					},
+					"response": []
 				}
 			]
+		},
+		{
+			"name": "http://localhost:8080/health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
