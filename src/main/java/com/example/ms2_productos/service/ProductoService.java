@@ -39,8 +39,11 @@ public class ProductoService {
         );
     }
 
-    public Page<Producto> obtenerProductos(Pageable pageable) {
-        return productoRepository.findAll(pageable);
+    public Page<Producto> obtenerProductos(Pageable pageable, String search) {
+        if (search == null || search.isBlank()) {
+            return productoRepository.findAll(pageable);
+        }
+        return productoRepository.findByNombreContainingIgnoreCase(search.trim(), pageable);
     }
 
     public Optional<Producto> obtenerProductoPorId(Long idProducto) {

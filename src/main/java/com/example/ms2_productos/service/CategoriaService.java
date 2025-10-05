@@ -9,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,13 +20,19 @@ public class CategoriaService {
     @Autowired
     private ProductoRepository productoRepository;
 
-    public Page<Categoria> obtenerCategorias(Pageable pageable) {
-        return categoriaRepository.findAll(pageable);
+    public Page<Categoria> obtenerCategorias(Pageable pageable, String search) {
+        if (search == null || search.isBlank()) {
+            return categoriaRepository.findAll(pageable);
+        }
+        return categoriaRepository.findByNombreCategoriaContainingIgnoreCase(search.trim(), pageable);
     }
 
-    // 2) Productos de una categoría paginados
-    public Page<Producto> obtenerProductosPorCategoria(Long idCategoria, Pageable pageable) {
-        return productoRepository.findByCategoria_IdCategoria(idCategoria, pageable);
+    public Page<Producto> obtenerProductosPorCategoria(Long idCategoria, Pageable pageable, String search) {
+        String q = (search == null) ? null : search.trim();
+        if (q == null || q.isBlank()) {
+            return productoRepository.findByCategoria_IdCategoria(idCategoria, pageable);
+        }
+        return productoRepository.findByCategoria_IdCategoriaAndNombreContainingIgnoreCase(idCategoria, q, pageable);
     }
 
     public Optional<Categoria> obtenerCategoriaPorId(Long idCategoria) {

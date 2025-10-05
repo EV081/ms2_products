@@ -23,9 +23,10 @@ public class ProductoController {
 
     @GetMapping
     public PaginatedResponse<ProductoResponseDTO> obtenerProductos(
-            @PageableDefault(page = 0, size = 10) Pageable pageable
+            @PageableDefault(page = 0, size = 10) Pageable pageable,
+            @RequestParam(value = "search", required = false) String search
     ) {
-        Page<Producto> page = productoService.obtenerProductos(pageable);
+        Page<Producto> page = productoService.obtenerProductos(pageable, search);
 
         List<ProductoResponseDTO> content = page.getContent().stream()
                 .map(productoService::convertirAProductoResponseDTO)
@@ -37,7 +38,6 @@ public class ProductoController {
         resp.setSize(page.getSize());
         resp.setTotalElements(page.getTotalElements());
         resp.setTotalPages(page.getTotalPages());
-
         return resp;
     }
 

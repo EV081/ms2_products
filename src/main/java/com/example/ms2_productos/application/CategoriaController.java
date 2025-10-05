@@ -28,9 +28,10 @@ public class CategoriaController {
 
     @GetMapping
     public PaginatedResponse<Categoria> obtenerCategorias(
-            @PageableDefault(page = 0, size = 10) Pageable pageable
+            @PageableDefault(page = 0, size = 10) Pageable pageable,
+            @RequestParam(value = "search", required = false) String search
     ) {
-        Page<Categoria> page = categoriaService.obtenerCategorias(pageable);
+        Page<Categoria> page = categoriaService.obtenerCategorias(pageable, search);
 
         PaginatedResponse<Categoria> resp = new PaginatedResponse<>();
         resp.setContents(page.getContent());
@@ -44,9 +45,10 @@ public class CategoriaController {
     @GetMapping("/{idCategoria}/productos")
     public PaginatedResponse<ProductoResponseDTO> obtenerProductosPorCategoria(
             @PathVariable Long idCategoria,
-            @PageableDefault(page = 0, size = 10) Pageable pageable
+            @PageableDefault(page = 0, size = 10) Pageable pageable,
+            @RequestParam(value = "search", required = false) String search
     ) {
-        Page<Producto> page = categoriaService.obtenerProductosPorCategoria(idCategoria, pageable);
+        Page<Producto> page = categoriaService.obtenerProductosPorCategoria(idCategoria, pageable, search);
 
         List<ProductoResponseDTO> content = page.getContent().stream()
                 .map(productoService::convertirAProductoResponseDTO)
