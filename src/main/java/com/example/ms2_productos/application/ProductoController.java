@@ -2,6 +2,7 @@ package com.example.ms2_productos.application;
 
 import com.example.ms2_productos.domain.Producto;
 import com.example.ms2_productos.domain.dto.PaginatedResponse;
+import com.example.ms2_productos.domain.dto.ProductoRequestDTO;
 import com.example.ms2_productos.domain.dto.ProductoResponseDTO;
 import com.example.ms2_productos.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,9 +50,9 @@ public class ProductoController {
     }
 
     @PostMapping
-    public ProductoResponseDTO crearProducto(@RequestBody Producto producto) {
-        Producto productoCreado = productoService.crearProducto(producto);
-        return productoService.convertirAProductoResponseDTO(productoCreado);
+    public ResponseEntity<ProductoResponseDTO> crearProducto(@RequestBody ProductoRequestDTO dto) {
+        Producto creado = productoService.crearProducto(dto);
+        return ResponseEntity.ok(productoService.convertirAProductoResponseDTO(creado));
     }
 
     @PutMapping("/{idProducto}")
