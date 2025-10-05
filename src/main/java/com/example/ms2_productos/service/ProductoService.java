@@ -1,11 +1,13 @@
 package com.example.ms2_productos.service;
 
 import com.example.ms2_productos.domain.dto.CategoriaDTO;
+import com.example.ms2_productos.domain.dto.ProductoRequestDTO;
 import com.example.ms2_productos.domain.dto.ProductoResponseDTO;
 import com.example.ms2_productos.domain.Categoria;
 import com.example.ms2_productos.domain.Producto;
 import com.example.ms2_productos.repository.CategoriaRepository;
 import com.example.ms2_productos.repository.ProductoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -50,13 +52,17 @@ public class ProductoService {
         return productoRepository.findById(idProducto);
     }
 
-    public Producto crearProducto(Producto producto) {
-        Categoria categoria = categoriaRepository.findById(producto.getCategoria().getIdCategoria())
-                .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
+    public Producto crearProducto(ProductoRequestDTO dto) {
+        Categoria categoria = categoriaRepository.findById(dto.getIdCategoria())
+                .orElseThrow(() -> new EntityNotFoundException("Categoría no encontrada"));
 
-        producto.setCategoria(categoria);
+        Producto entidad = new Producto();
+        entidad.setNombre(dto.getNombre());
+        entidad.setDescripcion(dto.getDescripcion());
+        entidad.setPrecio(dto.getPrecio());
+        entidad.setCategoria(categoria);
 
-        return productoRepository.save(producto);
+        return productoRepository.save(entidad);
     }
 
     public Producto actualizarProducto(Long idProducto, Producto producto) {
